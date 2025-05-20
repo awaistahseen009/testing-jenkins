@@ -5,7 +5,10 @@ pipeline {
     }
     stages {
         stage('Cloning the repository from the github') {
+            steps {
             git branch: 'main', url: 'https://github.com/awaistahseen009/testing-jenkins'
+
+            }
         }
         stage("Setting up the virtual env and installing the dependencies"){
             steps {
