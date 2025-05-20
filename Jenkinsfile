@@ -37,7 +37,8 @@ pipeline {
                     -Dsonar.projectName=pythonProject \
                     -Dsonar.projectVersion=1.0
                     -Dsonar.sources=. \
-                    -Dsonar.python.version=3'''
+                    -Dsonar.python.version=3
+                    -Dsonar.exclusions=venv/**,requirements.txt'''
                 }
             }
         }
