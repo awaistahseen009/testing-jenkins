@@ -1,47 +1,47 @@
 pipeline {
     agent any
+    
     environment {
         VENV_DIR = "venv"
     }
     stages {
-        // Stage 1
-        stage('Cloning the repository from GitHub') {
+        // stage 1
+
+        stage('Cloning the repository from the github') {
             steps {
-                git branch: 'main', url: 'https://github.com/awaistahseen009/testing-jenkins'
+            git branch: 'main', url: 'https://github.com/awaistahseen009/testing-jenkins'
+
             }
         }
         // Stage 2
-        stage('Setting up the virtual env and installing dependencies') {
+        stage("Setting up the virtual env and installing the dependencies"){
             steps {
                 echo "Installing the dependencies"
                 sh '''
-                python3 -m venv ${VENV_DIR}
-                . ./${VENV_DIR}/bin/activate
+                python -m venv ${VENV_DIR}
+                chmod 700 ./${VENV_DIR}/bin/activate
+                ./${VENV_DIR}/bin/activate
                 pip install --upgrade pip --break-system-packages
                 pip install -r requirements.txt --break-system-packages
                 '''
             }
         }
         // Stage 3
-        stage('Running code analysis with SonarQube') {
+        stage("Running the code analysis using SonarQube"){
             environment {
-                scannerHome = tool 'sonarqube'
+                scannerHome = tool "sonarqube"
             }
-            steps {
-                withSonarQubeEnv(credentialsId: 'sonarqube-token', installationName: 'sonarserver') {
-                    sh '''
-                    . ./${VENV_DIR}/bin/activate
-                    ${scannerHome}/bin/sonar-scanner \
-                      -Dsonar.projectKey=pythonProject \
-                      -Dsonar.projectName=pythonProject \
-                      -Dsonar.projectVersion=1.0 \
-                      -Dsonar.sources=. \
-                      -Dsonar.python.version=3 \
-                      -Dsonar.exclusions=venv/**,requirements.txt
-                    '''
+            steps{
+                withSonarQubeEnv("sonarserver"){
+                    sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=pythonProject \
+                    -Dsonar.projectName=pythonProject \
+                    -Dsonar.projectVersion=1.0 \
+                    -Dsonar.sources=. \
+                    -Dsonar.python.version=3 \ 
+                    -Dsonar.exclusions=venv/**,requirements.txt'''
                 }
             }
         }
+
     }
-   
 }
