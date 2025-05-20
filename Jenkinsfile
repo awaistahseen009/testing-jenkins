@@ -1,10 +1,6 @@
 pipeline {
     agent any
-    tools {
-        // This ensures SonarQube scanner is available
-        // Make sure this tool name matches Jenkins Global Tool config
-        sonarScanner 'sonarqube'
-    }
+    
     environment {
         VENV_DIR = "venv"
     }
