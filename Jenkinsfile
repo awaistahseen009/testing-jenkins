@@ -35,9 +35,9 @@ pipeline {
                 withSonarQubeEnv("sonarserver"){
                     sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=pythonProject \
                     -Dsonar.projectName=pythonProject \
-                    -Dsonar.projectVersion=1.0
+                    -Dsonar.projectVersion=1.0 \ 
                     -Dsonar.sources=. \
-                    -Dsonar.python.version=3
+                    -Dsonar.python.version=3 \ 
                     -Dsonar.exclusions=venv/**,requirements.txt'''
                 }
             }
