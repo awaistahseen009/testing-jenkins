@@ -17,7 +17,7 @@ pipeline {
                 python -m venv ${VENV_DIR}
                 chmod 700 ./${VENV_DIR}/bin/activate
                 ./${VENV_DIR}/bin/activate
-                pip install --upgrade pip
+                pip install --upgrade pip --break-system-packages
                 pip install -r requirements.txt --break-system-packages
                 '''
             }
