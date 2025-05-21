@@ -58,7 +58,7 @@ pipeline {
                     nexusVersion: 'nexus3',
                     protocol: 'http', 
                     nexusUrl:'10.122.0.3:8081', 
-                    groupId:'QA', 
+                    groupId:'', 
                     version:"${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
                     repository:'my-packages', 
                     credentialsId:'nexuslogin', 
