@@ -54,7 +54,7 @@ pipeline {
 
         stage("Pushing the artifact to Nexus") {
             steps {
-                nexusArtifactUploader {
+                nexusArtifactUploader (
                     nexusVersion: 'nexus3',
                     protocol: 'http', 
                     nexusUrl:'10.122.0.3:8081', 
@@ -70,7 +70,7 @@ pipeline {
                         
                         ]
                     ]
-                }
+                )
             }
         }
     }
