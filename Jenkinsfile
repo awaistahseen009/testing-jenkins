@@ -54,20 +54,20 @@ pipeline {
 
         stage("Pushing the artifact to Nexus") {
             steps {
-                nexusArtifactUploader (
+                nexusArtifactUploader(
                     nexusVersion: 'nexus3',
-                    protocol: 'http', 
-                    nexusUrl:'10.122.0.3:8081', 
-                    groupId:'', 
-                    version:"${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
-                    repository:'my-packages', 
-                    credentialsId:'nexuslogin', 
-                    artifacts:[
-                        [artifactsId: 'pythonArtifact' , 
-                        classifier:'', 
-                        file: 'requirements/requirements.txt', 
-                        type:'txt'
-                        
+                    protocol: 'http',
+                    nexusUrl: '10.122.0.3:8081',
+                    groupId: '',
+                    version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP.replaceAll('[:\\s]', '_')}",
+                    repository: 'my-packages',
+                    credentialsId: 'nexuslogin',
+                    artifacts: [
+                        [
+                            artifactId: 'pythonArtifact',
+                            classifier: '',
+                            file: 'requirements.txt',
+                            type: 'txt'
                         ]
                     ]
                 )
