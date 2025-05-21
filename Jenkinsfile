@@ -64,7 +64,7 @@ pipeline {
                     credentialsId:'nexuslogin', 
                     artifacts:[
                         [artifactsId: 'pythonArtifact' , 
-                        classifier:, 
+                        classifier:'', 
                         file: 'requirements/requirements.txt', 
                         type:'txt'
                         
