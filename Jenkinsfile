@@ -51,5 +51,27 @@ pipeline {
                 }
             }
         }
+
+        stage("Pushing the artifact to Nexus") {
+            steps {
+                nexusArtifactUploader {
+                    nexusVersion: 'nexus3',
+                    protocol: 'http', 
+                    nexusUrl:'10.122.0.3:8081', 
+                    groupId:'QA', 
+                    version:"${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
+                    repository:'my-packages', 
+                    credentialsId:'nexuslogin', 
+                    artifacts:[
+                        [artifactsId: 'pythonArtifact' , 
+                        classifier:, 
+                        file: 'requirements/requirements.txt', 
+                        type:'txt'
+                        
+                        ]
+                    ]
+                }
+            }
+        }
     }
 }
